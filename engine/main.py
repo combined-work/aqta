@@ -9,6 +9,7 @@ from engine.strategies.strategy_loader import StrategyLoader
 from engine.database.session import SessionLocal
 
 def main():
+    """Main entry point for the AQTA application."""
     print("Starting AQTA...")
     # 1. Init DB
     init_db()
