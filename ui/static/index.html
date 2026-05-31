@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQTA Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-theme">
+    <header>
+        <div id="status-bar">
+            <span id="equity-display">Equity: $10,240.00</span>
+            <span id="pnl-display" class="profit">+$240.00 (2.4%)</span>
+            <span id="regime-badge" class="bull">BULL_TREND</span>
+            <button id="halt-btn">■ HALT</button>
+        </div>
+    </header>
+
+    <nav>
+        <button onclick="showTab('overview')">Overview</button>
+        <button onclick="showTab('strategies')">Strategies</button>
+        <button onclick="showTab('positions')">Positions</button>
+        <button onclick="showTab('health')">System Health</button>
+    </nav>
+
+    <main id="tab-container">
+        <section id="overview" class="tab-content active">
+            <h2>Command Center</h2>
+            <canvas id="equityChart"></canvas>
+        </section>
+        <section id="strategies" class="tab-content">
+            <h2>Strategy Command Center</h2>
+            <table id="strategy-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>PnL (7d)</th>
+                    </tr>
+                </thead>
+                <tbody id="strategy-list">
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
