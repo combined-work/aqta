@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+shared/trading.db
+shared/analytics.duckdb
+logs/*.log
+logs/*.jsonl
+data_cache/
+ui_output.log
+verification/

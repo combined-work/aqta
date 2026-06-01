@@ -1,0 +1,133 @@
+[system]
+engine_port = 8765
+ui_port = 8766
+timezone = "America/New_York"
+log_level = "INFO"          # DEBUG | INFO | WARN | ERROR
+log_rotation_days = 30
+log_format = "json"         # json | text
+
+[capital]
+daily_capital_base = 10000.0
+min_profit_target_pct = 1.5
+ideal_profit_target_pct = 3.0
+stretch_profit_target_pct = 5.0
+exceptional_day_pct = 7.5
+profit_lock_trigger_pct = 20.0   # % of ideal target
+profit_protect_pct = 0.60
+profit_lock_step2_pct = 0.70
+soft_halt_loss_pct = 1.5
+hard_halt_loss_pct = 3.0
+emergency_halt_loss_pct = 5.0
+profit_sweep_threshold = 30000.0
+recovery_max_days = 5
+recovery_risk_multiplier = 0.5
+compounding_streak_days = 5
+compounding_size_multiplier = 1.20
+compounding_max_multiplier = 1.50
+capital_base_scale_per_10d = 0.05
+
+[scheduler]
+main_cycle_interval_minutes = 5    # Valid: 1–10 integer
+crypto_cycle_interval_minutes = 15
+
+[risk]
+max_single_position_pct = 0.10
+max_single_position_leveraged_pct = 0.05
+max_sector_pct = 0.35
+max_correlation_threshold = 0.75
+correlation_block_threshold = 0.90
+max_portfolio_leverage_overnight = 2.0
+max_portfolio_leverage_intraday = 4.0
+pdt_equity_buffer = 26500.0
+kelly_fraction = 0.25
+vol_target_annualized = 0.15
+intraday_drawdown_soft_pct = 0.02
+intraday_drawdown_hard_pct = 0.04
+max_strategy_drawdown_pct = 0.25
+margin_utilization_warn_pct = 0.75
+margin_utilization_halt_pct = 0.90
+max_open_positions = 10
+total_portfolio_at_risk_pct = 0.06  # Max 6% of equity at risk simultaneously
+
+[greeks_limits]
+net_delta_warn = 0.20          # × NAV
+net_delta_block = 0.30
+net_gamma_warn = 0.015         # × NAV
+net_gamma_block = 0.025
+net_theta_warn = -200.0        # $/day
+net_theta_block = -300.0
+net_vega_warn = 500.0          # $ per 1% IV move
+net_vega_block = 800.0
+
+[data]
+primary_data_provider = "yfinance"   # yfinance | polygon
+universe_min_adtv_usd = 5_000_000
+universe_min_price = 1.0
+universe_max_price = 5000.0
+cache_ttl_daily_bars_hours = 24
+cache_ttl_intraday_bars_hours = 1
+feature_cache_dir = "data_cache/features"
+max_cache_size_gb = 50.0
+
+[nlp]
+llm_mode = "DISABLED"              # DISABLED | LOCAL | CLOUD
+local_model = "llama3.3"
+ollama_base_url = "http://localhost:11434"
+cloud_fallback_enabled = false
+cloud_provider = "anthropic"       # anthropic | openai
+max_cloud_calls_per_day = 20
+finbert_model = "ProsusAI/finbert"
+finbert_onnx_path = "data_cache/models/finbert.onnx"
+finbert_batch_size = 32
+vader_enabled = true               # Tier 3 always on
+
+[tax]
+tlh_min_loss_threshold = -500.0
+tlh_min_loss_threshold_december = -300.0
+marginal_tax_rate = 0.35
+ltcg_tax_rate = 0.20
+state_tax_rate = 0.09
+gain_deferral_window_start_days = 335
+gain_deferral_window_end_days = 365
+amt_check_enabled = true
+
+[backtest]
+survivorship_bias_control = true
+default_commission = 0.0
+default_slippage_bps = 3.0
+mc_simulation_paths = 10000
+walk_forward_is_months = 18
+walk_forward_oos_months = 3
+auto_disable_oos_threshold = 0.30
+warn_oos_threshold = 0.50
+
+[notifications]
+desktop_notifications = true
+email_enabled = false
+smtp_server = ""
+smtp_port = 587
+smtp_username = ""
+webhook_enabled = false
+webhook_url = ""
+sms_enabled = false
+twilio_sid = ""
+twilio_token = ""
+min_alert_level = "WARN"           # INFO | WARN | CRITICAL
+
+[crypto]
+default_exchange = "coinbase"      # coinbase | binance | robinhood
+defi_enabled = false               # web3 DeFi interactions
+funding_rate_monitor = true
+fear_greed_check_hours = 4
+
+[redis]
+host = "localhost"
+port = 6379
+db = 0
+max_memory_mb = 512
+
+[backup]
+enabled = true
+retention_days = 30
+compress = true
+path = "data_cache/backups"
