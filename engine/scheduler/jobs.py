@@ -44,13 +44,20 @@ class TradingScheduler:
         # 1. Get enabled strategies
         strategies = self.engine.strategy_loader.get_enabled_strategies()
 
-        # 2. Run scan/generate signals (Simplified for now)
+        # 2. Run scan/generate signals
         all_signals = []
-        for strategy in strategies:
-             # In a real app, we'd fetch data for symbols first
-             # signals = await strategy.generate_signals(df, portfolio_state)
-             # all_signals.extend(signals)
-             pass
+        # In this implementation, we'll iterate through a predefined universe for demonstration
+        universe = ["AAPL", "TSLA", "MSFT", "AMD", "NVDA"]
+
+        for symbol in universe:
+            # Fetch data (Simplified for shadow mode)
+            # df = await self.engine.market_data.get_ohlcv(symbol)
+            # portfolio_state = await self.engine.get_portfolio_state(symbol)
+
+            for strategy in strategies:
+                 # signals = await strategy.generate_signals(df, portfolio_state)
+                 # all_signals.extend(signals)
+                 pass
 
         # 3. Execute batch
         if all_signals:

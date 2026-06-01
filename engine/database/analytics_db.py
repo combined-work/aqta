@@ -20,8 +20,14 @@ class AnalyticsDB:
         """)
 
     def sync_from_sqlite(self, sqlite_db_path: str):
-        # ETL logic to move data from SQLite to DuckDB
-        pass
+        """Copies closed trades from SQLite to DuckDB for analytics."""
+        import sqlite3
+        sl_conn = sqlite3.connect(sqlite_db_path)
+        # Load trades into DuckDB
+        df = pd.read_sql_query("SELECT id, symbol, realized_pl as pnl, strategy_id, last_updated as timestamp FROM positions WHERE current_qty = 0", sl_conn)
+        if not df.empty:
+             self.conn.execute("INSERT INTO fact_trades SELECT * FROM df")
+        sl_conn.close()
 
     def get_strategy_performance(self) -> pd.DataFrame:
         return self.conn.execute("SELECT strategy_id, SUM(pnl) as total_pnl FROM fact_trades GROUP BY strategy_id").df()

@@ -12,11 +12,15 @@ class StrategyLoader:
 
     def load_all(self):
         # Dynamically load from directories
-        # For now, manually add the ones we implemented
         from engine.strategies.equity.momentum.eq01_trend_following import EQ01TrendFollowing
         from engine.strategies.equity.momentum.a_batch import A1ORB, A2VWAPMomo
+        from engine.strategies.options.op_batch import OP010DTEIronCondor
+        from engine.strategies.crypto.cr_batch import CR01CryptoTrend
 
-        instances = [EQ01TrendFollowing(), A1ORB(), A2VWAPMomo()]
+        instances = [
+            EQ01TrendFollowing(), A1ORB(), A2VWAPMomo(),
+            OP010DTEIronCondor(), CR01CryptoTrend()
+        ]
         for inst in instances:
             self.strategies[inst.strategy_id] = inst
             self._sync_db(inst)

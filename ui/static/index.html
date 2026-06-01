@@ -21,6 +21,8 @@
         <button onclick="showTab('overview')">Overview</button>
         <button onclick="showTab('strategies')">Strategies</button>
         <button onclick="showTab('positions')">Positions</button>
+        <button onclick="showTab('analytics')">Analytics</button>
+        <button onclick="showTab('tax')">Tax</button>
         <button onclick="showTab('health')">System Health</button>
     </nav>
 
@@ -43,6 +45,38 @@
                 <tbody id="strategy-list">
                 </tbody>
             </table>
+        </section>
+        <section id="positions" class="tab-content">
+            <h2>Open Positions</h2>
+            <table id="positions-table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Qty</th>
+                        <th>PnL</th>
+                    </tr>
+                </thead>
+                <tbody id="positions-list"></tbody>
+            </table>
+        </section>
+        <section id="analytics" class="tab-content">
+            <h2>Performance Analytics</h2>
+            <div id="analytics-overview">
+                <p>Sharpe Ratio: <span id="sharpe-val">3.2</span></p>
+                <p>Max Drawdown: <span id="drawdown-val">4.5%</span></p>
+            </div>
+        </section>
+        <section id="tax" class="tab-content">
+            <h2>Tax Optimization</h2>
+            <p>YTD Realized PnL: <span id="tax-pnl">$4,500</span></p>
+            <button onclick="downloadForm8949()">Download Form 8949</button>
+        </section>
+        <section id="health" class="tab-content">
+            <h2>System Health</h2>
+            <div id="health-status">
+                <p>Engine: <span class="profit">RUNNING</span></p>
+                <p>Redis: <span class="profit">CONNECTED</span></p>
+            </div>
         </section>
     </main>
 
